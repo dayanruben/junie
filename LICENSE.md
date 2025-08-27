@@ -1,0 +1,1 @@
+Use is subject to [Junie EAP Terms of Service](https://www.jetbrains.com/legal/docs/terms/jetbrains-junie/)
