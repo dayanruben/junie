@@ -1,1 +1,3 @@
-
+{"version":"101.1","platform":"linux-aarch64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/101.1/junie-eap-101.1-linux-aarch64.zip","sha256":"676c89808b088b68ccd856eecedba55ac4f9210abb8ce35684e7943107e5934c","size":184110856}
+{"version":"101.1","platform":"linux-amd64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/101.1/junie-eap-101.1-linux-amd64.zip","sha256":"1640df47818d54d43e3bea162b42a4f2df085f732f343dc6ed3fcba1765ae10d","size":185099503}
+{"version":"101.1","platform":"macos-aarch64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/101.1/junie-eap-101.1-macos-aarch64.zip","sha256":"aa62dd40124bb0ecdeccad51284a8b89d6e50c459d0270f4fb68c5d08a1e960a","size":182967245}
