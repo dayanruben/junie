@@ -1,0 +1,3 @@
+{"version":"113.1","platform":"linux-aarch64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/113.1/junie-nightly-113.1-linux-aarch64.zip","sha256":"8c9e6a39aa4f9d73069e2a9b75dc9c91432113e6717464fa9cabe912c56f97ac","size":183035897}
+{"version":"113.1","platform":"linux-amd64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/113.1/junie-nightly-113.1-linux-amd64.zip","sha256":"f3a98e95a2347f6fbb354e61962e745e4d3002a7555540ebd83fb5f4874d53de","size":184024544}
+{"version":"113.1","platform":"macos-aarch64","downloadUrl":"https://github.com/jetbrains-junie/junie/releases/download/113.1/junie-nightly-113.1-macos-aarch64.zip","sha256":"ea266931470ccf25e6419b0b78b14903f770286c078c25f6e6cfb94540aceea2","size":181892286}
