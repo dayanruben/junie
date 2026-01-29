@@ -4,7 +4,7 @@
 # Usage: curl -fsSL https://junie.jetbrains.com/install.sh | bash
 #
 # To install a specific version:
-#   JUNIE_VERSION=656.1 curl -fsSL https://junie.jetbrains.com/install.sh | bash
+#   curl -fsSL https://junie.jetbrains.com/install.sh | JUNIE_VERSION=656.1 bash
 #
 
 set -euo pipefail
