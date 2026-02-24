@@ -1,0 +1,3 @@
+{"version":"802.7","platform":"linux-aarch64","downloadUrl":"https://github.com/JetBrains/junie/releases/download/802.7/junie-eap-802.7-linux-aarch64.zip","sha256":"8d11c46a0f002f4a6d4a19713675df332ad999cb5c6ac48bc4438239a70dccfd","size":206666625}
+{"version":"802.7","platform":"linux-amd64","downloadUrl":"https://github.com/JetBrains/junie/releases/download/802.7/junie-eap-802.7-linux-amd64.zip","sha256":"f31407432609554e2eb6cfea410f83589238c411fc47c1f9b6ff56ee155e9064","size":207655272}
+{"version":"802.7","platform":"macos-aarch64","downloadUrl":"https://github.com/JetBrains/junie/releases/download/802.7/junie-eap-802.7-macos-aarch64.zip","sha256":"037490a51318b24e57dbb07b73c97d1cdaf1f585df25f757db5bdd173928839c","size":205484598}
