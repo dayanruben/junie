@@ -426,48 +426,8 @@ fi
 ln -sfn "$TARGET_DIR" "$JUNIE_DATA/current"
 
 log "Installed successfully!"
-
-add_to_path() {
-  if echo "$PATH" | tr ':' '\n' | grep -qx "$HOME/.local/bin"; then
-    return
-  fi
-
-  local shell_name
-  shell_name=$(basename "${SHELL:-}" 2>/dev/null || echo "")
-
-  local profile_file=""
-  local export_line='export PATH="$HOME/.local/bin:$PATH"'
-  case "$shell_name" in
-    zsh)  profile_file="$HOME/.zshrc" ;;
-    bash)
-      if [[ "$OS_NAME" == "macos" && -f "$HOME/.bash_profile" ]]; then
-        profile_file="$HOME/.bash_profile"
-      else
-        profile_file="$HOME/.bashrc"
-      fi
-      ;;
-    fish)
-      profile_file="$HOME/.config/fish/config.fish"
-      export_line='fish_add_path "$HOME/.local/bin"'
-      ;;
-    *)    profile_file="$HOME/.profile" ;;
-  esac
-
-  if [[ -f "$profile_file" ]] && grep -q '\.local/bin' "$profile_file"; then
-    return
-  fi
-
-  echo "" >> "$profile_file"
-  echo "$export_line" >> "$profile_file"
-  log "Added $JUNIE_BIN to PATH in $profile_file"
-}
-
-add_to_path
-
-if echo "$PATH" | tr ':' '\n' | grep -qx "$HOME/.local/bin"; then
-  echo ""
-  echo "Run: junie --help"
-else
-  echo ""
-  echo "Restart your shell, then run: junie --help"
-fi
+echo ""
+echo "Add to your PATH if not already:"
+echo "  export PATH=\"\$HOME/.local/bin:\$PATH\""
+echo ""
+echo "Then run: junie --help"
