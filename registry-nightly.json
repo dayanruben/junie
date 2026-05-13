@@ -122,7 +122,7 @@
     {
       "id": "cline",
       "name": "Cline",
-      "version": "2.18.0",
+      "version": "3.0.0",
       "description": "Autonomous coding agent CLI - capable of creating/editing files, running commands, using the browser, and more",
       "repository": "https://github.com/cline/cline",
       "website": "https://cline.bot/cli",
@@ -133,7 +133,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cline.svg",
       "distribution": {
         "npx": {
-          "package": "cline@2.18.0",
+          "package": "cline@3.0.0",
           "args": [
             "--acp"
           ]
@@ -474,7 +474,7 @@
     {
       "id": "factory-droid",
       "name": "Factory Droid",
-      "version": "0.123.0",
+      "version": "0.123.1",
       "description": "Factory Droid - AI coding agent powered by Factory AI",
       "website": "https://factory.ai/product/cli",
       "authors": [
@@ -483,7 +483,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "droid@0.123.0",
+          "package": "droid@0.123.1",
           "args": [
             "exec",
             "--output-format",
@@ -500,7 +500,7 @@
     {
       "id": "fast-agent",
       "name": "fast-agent",
-      "version": "0.7.2",
+      "version": "0.7.3",
       "description": "Code and build agents with comprehensive multi-provider support",
       "repository": "https://github.com/evalstate/fast-agent",
       "website": "https://fast-agent.ai",
@@ -510,7 +510,7 @@
       "license": "Apache 2.0",
       "distribution": {
         "uvx": {
-          "package": "fast-agent-acp==0.7.2",
+          "package": "fast-agent-acp==0.7.3",
           "args": [
             "-x"
           ]
@@ -521,7 +521,7 @@
     {
       "id": "gemini",
       "name": "Gemini CLI",
-      "version": "0.41.2",
+      "version": "0.42.0",
       "description": "Google's official CLI for Gemini",
       "repository": "https://github.com/google-gemini/gemini-cli",
       "website": "https://geminicli.com",
@@ -531,7 +531,7 @@
       "license": "Apache-2.0",
       "distribution": {
         "npx": {
-          "package": "@google/gemini-cli@0.41.2",
+          "package": "@google/gemini-cli@0.42.0",
           "args": [
             "--acp"
           ]
@@ -542,7 +542,7 @@
     {
       "id": "github-copilot-cli",
       "name": "GitHub Copilot",
-      "version": "1.0.45",
+      "version": "1.0.46",
       "description": "GitHub's AI pair programmer",
       "repository": "https://github.com/github/copilot-cli",
       "website": "https://github.com/features/copilot/cli/",
@@ -552,7 +552,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@github/copilot@1.0.45",
+          "package": "@github/copilot@1.0.46",
           "args": [
             "--acp"
           ]
@@ -632,7 +632,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "1687.1",
+      "version": "1689.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -643,35 +643,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1687.1/junie-nightly-1687.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1689.1/junie-nightly-1689.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1687.1/junie-nightly-1687.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1689.1/junie-nightly-1689.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1687.1/junie-nightly-1687.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1689.1/junie-nightly-1689.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1687.1/junie-nightly-1687.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1689.1/junie-nightly-1689.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1687.1/junie-nightly-1687.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1689.1/junie-nightly-1689.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -1023,7 +1023,7 @@
     {
       "id": "qwen-code",
       "name": "Qwen Code",
-      "version": "0.15.10",
+      "version": "0.15.11",
       "description": "Alibaba's Qwen coding assistant",
       "repository": "https://github.com/QwenLM/qwen-code",
       "website": "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
@@ -1033,7 +1033,7 @@
       "license": "Apache-2.0",
       "distribution": {
         "npx": {
-          "package": "@qwen-code/qwen-code@0.15.10",
+          "package": "@qwen-code/qwen-code@0.15.11",
           "args": [
             "--acp",
             "--experimental-skills"
