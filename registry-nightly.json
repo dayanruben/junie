@@ -632,7 +632,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "1768.1",
+      "version": "1771.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -643,35 +643,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1768.1/junie-nightly-1768.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1771.1/junie-nightly-1771.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1768.1/junie-nightly-1768.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1771.1/junie-nightly-1771.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1768.1/junie-nightly-1768.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1771.1/junie-nightly-1771.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1768.1/junie-nightly-1768.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1771.1/junie-nightly-1771.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1768.1/junie-nightly-1768.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1771.1/junie-nightly-1771.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -684,7 +684,7 @@
     {
       "id": "kilo",
       "name": "Kilo",
-      "version": "7.3.0",
+      "version": "7.3.1",
       "description": "The open source coding agent",
       "repository": "https://github.com/Kilo-Org/kilocode",
       "website": "https://kilo.ai/",
@@ -696,35 +696,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.0/kilo-darwin-arm64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.1/kilo-darwin-arm64.zip",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.0/kilo-darwin-x64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.1/kilo-darwin-x64.zip",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.0/kilo-linux-arm64.tar.gz",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.1/kilo-linux-arm64.tar.gz",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.0/kilo-linux-x64.tar.gz",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.1/kilo-linux-x64.tar.gz",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.0/kilo-windows-x64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.1/kilo-windows-x64.zip",
             "cmd": "./kilo.exe",
             "args": [
               "acp"
@@ -732,7 +732,7 @@
           }
         },
         "npx": {
-          "package": "@kilocode/cli@7.3.0",
+          "package": "@kilocode/cli@7.3.1",
           "args": [
             "acp"
           ]
@@ -1085,7 +1085,7 @@
     {
       "id": "stakpak",
       "name": "Stakpak",
-      "version": "0.3.81",
+      "version": "0.3.82",
       "description": "Open-source DevOps agent in Rust with enterprise-grade security",
       "repository": "https://github.com/stakpak/agent",
       "website": "https://stakpak.dev",
@@ -1097,35 +1097,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.81/stakpak-darwin-aarch64.tar.gz",
+            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.82/stakpak-darwin-aarch64.tar.gz",
             "cmd": "./stakpak",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.81/stakpak-darwin-x86_64.tar.gz",
+            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.82/stakpak-darwin-x86_64.tar.gz",
             "cmd": "./stakpak",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.81/stakpak-linux-aarch64.tar.gz",
+            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.82/stakpak-linux-aarch64.tar.gz",
             "cmd": "./stakpak",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.81/stakpak-linux-x86_64.tar.gz",
+            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.82/stakpak-linux-x86_64.tar.gz",
             "cmd": "./stakpak",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.81/stakpak-windows-x86_64.zip",
+            "archive": "https://github.com/stakpak/agent/releases/download/v0.3.82/stakpak-windows-x86_64.zip",
             "cmd": "./stakpak.exe",
             "args": [
               "acp"
