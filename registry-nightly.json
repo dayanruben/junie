@@ -474,7 +474,7 @@
     {
       "id": "factory-droid",
       "name": "Factory Droid",
-      "version": "0.128.0",
+      "version": "0.129.0",
       "description": "Factory Droid - AI coding agent powered by Factory AI",
       "website": "https://factory.ai/product/cli",
       "authors": [
@@ -483,7 +483,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "droid@0.128.0",
+          "package": "droid@0.129.0",
           "args": [
             "exec",
             "--output-format",
@@ -500,7 +500,7 @@
     {
       "id": "fast-agent",
       "name": "fast-agent",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "description": "Code and build agents with comprehensive multi-provider support",
       "repository": "https://github.com/evalstate/fast-agent",
       "website": "https://fast-agent.ai",
@@ -510,7 +510,7 @@
       "license": "Apache 2.0",
       "distribution": {
         "uvx": {
-          "package": "fast-agent-acp==0.7.5",
+          "package": "fast-agent-acp==0.7.6",
           "args": [
             "-x"
           ]
@@ -542,7 +542,7 @@
     {
       "id": "github-copilot-cli",
       "name": "GitHub Copilot",
-      "version": "1.0.48",
+      "version": "1.0.50",
       "description": "GitHub's AI pair programmer",
       "repository": "https://github.com/github/copilot-cli",
       "website": "https://github.com/features/copilot/cli/",
@@ -552,7 +552,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@github/copilot@1.0.48",
+          "package": "@github/copilot@1.0.50",
           "args": [
             "--acp"
           ]
@@ -632,7 +632,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "1754.4",
+      "version": "1759.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -643,35 +643,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1754.4/junie-nightly-1754.4-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1759.1/junie-nightly-1759.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1754.4/junie-nightly-1754.4-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1759.1/junie-nightly-1759.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1754.4/junie-nightly-1754.4-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1759.1/junie-nightly-1759.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1754.4/junie-nightly-1754.4-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1759.1/junie-nightly-1759.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1754.4/junie-nightly-1754.4-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1759.1/junie-nightly-1759.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
