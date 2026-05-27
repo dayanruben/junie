@@ -1,4 +1,5 @@
 #
+# DO NOT EDIT — generated from templates/install.ps1.template by templates/generate.sh
 # Junie CLI Installer for Windows
 # Usage: irm https://junie.jetbrains.com/install.ps1 | iex
 #

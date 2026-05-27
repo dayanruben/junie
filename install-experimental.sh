@@ -1,4 +1,5 @@
 #!/bin/bash
+# DO NOT EDIT — generated from templates/install.sh.template by templates/generate.sh
 #
 # Junie CLI Installer
 # Usage: curl -fsSL https://junie.jetbrains.com/install.sh | bash
