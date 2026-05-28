@@ -1,0 +1,5 @@
+# name	url
+release	https://raw.githubusercontent.com/jetbrains-junie/junie/main/update-info.jsonl
+eap	https://raw.githubusercontent.com/jetbrains-junie/junie/main/update-info-eap.jsonl
+nightly	https://raw.githubusercontent.com/jetbrains-junie/junie/main/update-info-nightly.jsonl
+experimental	https://raw.githubusercontent.com/jetbrains-junie/junie/main/update-info-experimental.jsonl

@@ -1,0 +1,240 @@
+#!/bin/bash
+#
+# Junie CLI Installer
+# Usage: curl -fsSL https://junie.jetbrains.com/install.sh | bash
+#
+# To install a specific version:
+#   curl -fsSL https://junie.jetbrains.com/install.sh | JUNIE_VERSION=656.1 bash
+#
+
+set -euo pipefail
+
+CHANNEL="{{CHANNEL}}"
+UPDATE_INFO_URL="{{UPDATE_INFO_URL}}"
+GITHUB_RELEASES="https://github.com/jetbrains-junie/junie/releases"
+JUNIE_BIN="$HOME/.local/bin"
+JUNIE_DATA="$HOME/.local/share/junie"
+
+log() { echo "[Junie] $*"; }
+log_error() { echo "[Junie] ERROR: $*" >&2; }
+
+# Calculate SHA-256 checksum
+sha256sum_file() {
+  local file="$1"
+  if command -v shasum > /dev/null 2>&1; then
+    shasum -a 256 "$file" | cut -d' ' -f1
+  elif command -v sha256sum > /dev/null 2>&1; then
+    sha256sum "$file" | cut -d' ' -f1
+  else
+    log "Warning: No SHA-256 tool available, skipping checksum verification"
+    echo ""
+  fi
+}
+
+# Fetch latest version info from update-info JSONL
+fetch_latest_version() {
+  log "Fetching latest version info..."
+  local jsonl
+  jsonl=$(curl -fsSL "$UPDATE_INFO_URL")
+
+  # Find the latest entry for our platform (last matching line)
+  local entry
+  entry=$(echo "$jsonl" | grep "\"platform\":\"$PLATFORM\"" | tail -1)
+
+  if [[ -z "$entry" ]]; then
+    log_error "No release found for platform: $PLATFORM"
+    exit 1
+  fi
+
+  # Parse fields from JSON
+  VERSION=$(echo "$entry" | grep -o '"version":"[^"]*"' | sed 's/"version":"\([^"]*\)"/\1/')
+  DOWNLOAD_URL=$(echo "$entry" | grep -o '"downloadUrl":"[^"]*"' | sed 's/"downloadUrl":"\([^"]*\)"/\1/')
+  SHA256=$(echo "$entry" | grep -o '"sha256":"[^"]*"' | sed 's/"sha256":"\([^"]*\)"/\1/')
+
+  if [[ -z "$VERSION" || -z "$DOWNLOAD_URL" ]]; then
+    log_error "Failed to parse version info"
+    exit 1
+  fi
+}
+
+# Detect platform
+OS=$(uname -s)
+ARCH=$(uname -m)
+
+case "$OS" in
+  Linux)  OS_NAME="linux" ;;
+  Darwin) OS_NAME="macos" ;;
+  *)      log_error "Unsupported OS: $OS"; exit 1 ;;
+esac
+
+case "$ARCH" in
+  x86_64|amd64)   ARCH_NAME="amd64" ;;
+  aarch64|arm64)  ARCH_NAME="aarch64" ;;
+  *)              log_error "Unsupported architecture: $ARCH"; exit 1 ;;
+esac
+
+PLATFORM="${OS_NAME}-${ARCH_NAME}"
+
+# Determine version: use JUNIE_VERSION env var if set, otherwise fetch latest
+if [[ -n "${JUNIE_VERSION:-}" ]]; then
+  VERSION="$JUNIE_VERSION"
+  DOWNLOAD_URL="$GITHUB_RELEASES/download/${VERSION}/junie-${CHANNEL}-${VERSION}-${PLATFORM}.zip"
+  SHA256=""  # No checksum verification for specific version requests
+  log "Using specified version: $VERSION"
+else
+  fetch_latest_version
+fi
+
+log "Installing Junie $VERSION for $PLATFORM..."
+
+# Create directories
+mkdir -p "$JUNIE_BIN"
+mkdir -p "$JUNIE_DATA/versions"
+mkdir -p "$JUNIE_DATA/updates"
+
+# Install shim
+cat > "$JUNIE_BIN/junie" << 'SHIM_EOF'
+{{SHIM}}
+SHIM_EOF
+chmod +x "$JUNIE_BIN/junie"
+
+# Download and install binary
+TARGET_DIR="$JUNIE_DATA/versions/$VERSION"
+if [[ ! -d "$TARGET_DIR" ]]; then
+  TMP_ZIP=$(mktemp)
+
+  log "Downloading $DOWNLOAD_URL"
+  curl -fSL --progress-bar -o "$TMP_ZIP" "$DOWNLOAD_URL"
+
+  # Verify checksum
+  if [[ -n "$SHA256" ]]; then
+    actual_sha256=$(sha256sum_file "$TMP_ZIP")
+    if [[ -n "$actual_sha256" ]]; then
+      if ! echo "$actual_sha256" | grep -qi "^${SHA256}$"; then
+        log_error "Checksum verification failed!"
+        log_error "Expected: $SHA256"
+        log_error "Got: $actual_sha256"
+        rm -f "$TMP_ZIP"
+        exit 1
+      fi
+      log "Checksum verified"
+    fi
+  fi
+
+  # Extract to a staging dir on the same filesystem as $TARGET_DIR, validate the
+  # resolved binary, then atomically rename into place. This mirrors the shim's
+  # robust extraction so an interrupted install never leaves a half-extracted tree.
+  STAGING="$JUNIE_DATA/versions/.$VERSION.tmp.$$"
+  trap 'rm -rf "$STAGING"' EXIT INT TERM
+  rm -rf "$STAGING"
+  mkdir -p "$STAGING"
+  unzip -q "$TMP_ZIP" -d "$STAGING"
+  rm -f "$TMP_ZIP"
+
+  # Validate the extracted binary (inline equivalent of get_binary_path_in).
+  if [[ -d "$STAGING/Applications/junie.app" ]]; then
+    STAGED_BIN="$STAGING/Applications/junie.app/Contents/MacOS/junie"
+  elif [[ -f "$STAGING/junie/bin/junie" ]]; then
+    STAGED_BIN="$STAGING/junie/bin/junie"
+  elif [[ -f "$STAGING/junie" ]]; then
+    STAGED_BIN="$STAGING/junie"
+  else
+    STAGED_BIN=""
+  fi
+  if [[ -z "$STAGED_BIN" ]]; then
+    log_error "No junie binary found in downloaded payload"
+    exit 1
+  fi
+  chmod +x "$STAGED_BIN" 2>/dev/null || true
+  if [[ ! -x "$STAGED_BIN" ]]; then
+    log_error "Extracted binary is not executable: $STAGED_BIN"
+    exit 1
+  fi
+
+  [[ "$OS_NAME" == "macos" ]] && xattr -dr com.apple.quarantine "$STAGING" 2>/dev/null || true
+
+  # Atomic rename into the final version directory.
+  mv "$STAGING" "$TARGET_DIR"
+  trap - EXIT INT TERM
+fi
+
+# Set current version
+ln -sfn "$TARGET_DIR" "$JUNIE_DATA/current"
+
+log "Installed successfully!"
+
+# Returns 0 if PATH was already set or profile was updated.
+# Returns 1 if profile could not be updated (caller shows manual instructions).
+add_to_path() {
+  case ":$PATH:" in
+    *":$HOME/.local/bin:"*) return 0 ;;
+  esac
+
+  local shell_name export_line profile_files profile_dir
+  shell_name=$(basename "${SHELL:-}" 2>/dev/null || echo "")
+  export_line='export PATH="$HOME/.local/bin:$PATH"'
+
+  case "$shell_name" in
+    zsh)
+      # .zshrc is preferred; .zprofile is the fallback (also sourced by login shells)
+      profile_files="$HOME/.zshrc $HOME/.zprofile"
+      ;;
+    bash)
+      # macOS terminals open login shells (.bash_profile); Linux terminals open non-login shells (.bashrc)
+      if [[ "$OS_NAME" == "macos" ]]; then
+        profile_files="$HOME/.bash_profile $HOME/.profile"
+      else
+        profile_files="$HOME/.bashrc $HOME/.profile"
+      fi
+      ;;
+    fish)
+      profile_files="$HOME/.config/fish/config.fish"
+      export_line='fish_add_path "$HOME/.local/bin"'
+      ;;
+    *)
+      profile_files="$HOME/.profile"
+      ;;
+  esac
+
+  local file
+  for file in $profile_files; do
+    if [[ -f "$file" ]] && grep -q '\.local/bin' "$file" 2>/dev/null; then
+      return 0
+    fi
+  done
+
+  for file in $profile_files; do
+    profile_dir=$(dirname "$file")
+    if [[ ! -d "$profile_dir" ]]; then
+      mkdir -p "$profile_dir" 2>/dev/null || continue
+    fi
+    if { printf '\n%s\n' "$export_line" >> "$file"; } 2>/dev/null; then
+      log "Added $JUNIE_BIN to PATH in $file"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+if add_to_path; then
+  case ":$PATH:" in
+    *":$HOME/.local/bin:"*)
+      echo ""
+      echo "Run: junie --help"
+      ;;
+    *)
+      echo ""
+      echo "To get started, run:"
+      echo '  export PATH="$HOME/.local/bin:$PATH"'
+      echo ""
+      echo "Then run: junie --help"
+      ;;
+  esac
+else
+  echo ""
+  echo "Manually add to your PATH:"
+  echo '  export PATH="$HOME/.local/bin:$PATH"'
+  echo ""
+  echo "Then run: junie --help"
+fi

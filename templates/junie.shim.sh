@@ -1,101 +1,5 @@
 #!/bin/bash
 #
-# Junie CLI Installer
-# Usage: curl -fsSL https://junie.jetbrains.com/install.sh | bash
-#
-# To install a specific version:
-#   curl -fsSL https://junie.jetbrains.com/install.sh | JUNIE_VERSION=656.1 bash
-#
-
-set -euo pipefail
-
-CHANNEL="release"
-UPDATE_INFO_URL="https://raw.githubusercontent.com/jetbrains-junie/junie/main/update-info.jsonl"
-GITHUB_RELEASES="https://github.com/jetbrains-junie/junie/releases"
-JUNIE_BIN="$HOME/.local/bin"
-JUNIE_DATA="$HOME/.local/share/junie"
-
-log() { echo "[Junie] $*"; }
-log_error() { echo "[Junie] ERROR: $*" >&2; }
-
-# Calculate SHA-256 checksum
-sha256sum_file() {
-  local file="$1"
-  if command -v shasum > /dev/null 2>&1; then
-    shasum -a 256 "$file" | cut -d' ' -f1
-  elif command -v sha256sum > /dev/null 2>&1; then
-    sha256sum "$file" | cut -d' ' -f1
-  else
-    log "Warning: No SHA-256 tool available, skipping checksum verification"
-    echo ""
-  fi
-}
-
-# Fetch latest version info from update-info JSONL
-fetch_latest_version() {
-  log "Fetching latest version info..."
-  local jsonl
-  jsonl=$(curl -fsSL "$UPDATE_INFO_URL")
-
-  # Find the latest entry for our platform (last matching line)
-  local entry
-  entry=$(echo "$jsonl" | grep "\"platform\":\"$PLATFORM\"" | tail -1)
-
-  if [[ -z "$entry" ]]; then
-    log_error "No release found for platform: $PLATFORM"
-    exit 1
-  fi
-
-  # Parse fields from JSON
-  VERSION=$(echo "$entry" | grep -o '"version":"[^"]*"' | sed 's/"version":"\([^"]*\)"/\1/')
-  DOWNLOAD_URL=$(echo "$entry" | grep -o '"downloadUrl":"[^"]*"' | sed 's/"downloadUrl":"\([^"]*\)"/\1/')
-  SHA256=$(echo "$entry" | grep -o '"sha256":"[^"]*"' | sed 's/"sha256":"\([^"]*\)"/\1/')
-
-  if [[ -z "$VERSION" || -z "$DOWNLOAD_URL" ]]; then
-    log_error "Failed to parse version info"
-    exit 1
-  fi
-}
-
-# Detect platform
-OS=$(uname -s)
-ARCH=$(uname -m)
-
-case "$OS" in
-  Linux)  OS_NAME="linux" ;;
-  Darwin) OS_NAME="macos" ;;
-  *)      log_error "Unsupported OS: $OS"; exit 1 ;;
-esac
-
-case "$ARCH" in
-  x86_64|amd64)   ARCH_NAME="amd64" ;;
-  aarch64|arm64)  ARCH_NAME="aarch64" ;;
-  *)              log_error "Unsupported architecture: $ARCH"; exit 1 ;;
-esac
-
-PLATFORM="${OS_NAME}-${ARCH_NAME}"
-
-# Determine version: use JUNIE_VERSION env var if set, otherwise fetch latest
-if [[ -n "${JUNIE_VERSION:-}" ]]; then
-  VERSION="$JUNIE_VERSION"
-  DOWNLOAD_URL="$GITHUB_RELEASES/download/${VERSION}/junie-${CHANNEL}-${VERSION}-${PLATFORM}.zip"
-  SHA256=""  # No checksum verification for specific version requests
-  log "Using specified version: $VERSION"
-else
-  fetch_latest_version
-fi
-
-log "Installing Junie $VERSION for $PLATFORM..."
-
-# Create directories
-mkdir -p "$JUNIE_BIN"
-mkdir -p "$JUNIE_DATA/versions"
-mkdir -p "$JUNIE_DATA/updates"
-
-# Install shim
-cat > "$JUNIE_BIN/junie" << 'SHIM_EOF'
-#!/bin/bash
-#
 # Junie CLI Shim
 #
 # This script is the entry point for Junie CLI. It handles:
@@ -163,11 +67,10 @@ sha256sum_file() {
   fi
 }
 
-# Get binary path for a given version
-# Handles different package structures (macOS app bundle, Linux, direct binary)
-get_binary_path() {
-  local version="$1"
-  local version_dir="$VERSIONS_DIR/$version"
+# Get binary path for an arbitrary version directory.
+# Handles different package structures (macOS app bundle, Linux, direct binary).
+get_binary_path_in() {
+  local version_dir="$1"
 
   # macOS: look for .app bundle
   if [[ -d "$version_dir/Applications/junie.app" ]]; then
@@ -183,7 +86,46 @@ get_binary_path() {
   fi
 }
 
+# Get binary path for a given version (by name).
+get_binary_path() {
+  local version="$1"
+  get_binary_path_in "$VERSIONS_DIR/$version"
+}
+
+# Detect the archive type of $1 by extension or magic bytes.
+# Echoes "unzip", "tar", or "" if unknown.
+detect_archive_type() {
+  local file="$1"
+  case "$file" in
+    *.zip|*.ZIP) echo "unzip"; return 0 ;;
+    *.tar.gz|*.tgz|*.TAR.GZ|*.TGZ) echo "tar"; return 0 ;;
+  esac
+  local magic
+  magic=$(head -c 4 "$file" 2>/dev/null | od -An -tx1 | tr -d ' \n' 2>/dev/null || echo "")
+  case "$magic" in
+    504b0304*|504b0506*|504b0708*) echo "unzip" ;;
+    1f8b*)                          echo "tar"   ;;
+    *)                              echo ""      ;;
+  esac
+}
+
 # === Apply Pending Update ===
+#
+# Atomic extraction strategy:
+#   1. Verify manifest and checksum.
+#   2. Extract into a staging directory inside $VERSIONS_DIR (same FS, so `mv` is a rename).
+#   3. Validate the resolved binary in the staging tree is executable.
+#   4. Swap the staging dir into $VERSIONS_DIR/$version (replacing any previous tree
+#      wholesale -- important for macOS .app code-signing consistency).
+#   5. Flip the `current` symlink.
+#   6. Only then delete the zip + pending manifest.
+#
+# Failure modes:
+#   - Poisoned manifest (missing fields, missing zip, checksum mismatch):
+#       drop manifest + zip, return non-zero.
+#   - Retryable failure (extraction error, validation failure, missing extractor):
+#       preserve manifest + zip so the next launch retries, return non-zero.
+# In all failure cases $VERSIONS_DIR/$version is left untouched from before the attempt.
 apply_pending_update() {
   if [[ ! -f "$PENDING_UPDATE" ]]; then
     return 0
@@ -224,35 +166,110 @@ apply_pending_update() {
     fi
   fi
 
-  # Extract to versions directory
-  local target_dir="$VERSIONS_DIR/$version"
-  mkdir -p "$target_dir"
-
-  log "Extracting to $target_dir..."
-
-  if has_command unzip; then
-    unzip -q -o "$zip_path" -d "$target_dir"
-  elif has_command tar; then
-    # Fallback for .tar.gz files
-    tar -xzf "$zip_path" -C "$target_dir"
-  else
-    log "Error: No extraction tool available (unzip or tar)"
+  # Pick the right extractor by archive type. No silent wrong-tool fallback
+  # (don't run tar on a zip).
+  local extractor
+  extractor=$(detect_archive_type "$zip_path")
+  if [[ -z "$extractor" ]]; then
+    log "Error: Unknown archive type for $zip_path; preserving update for retry"
+    return 1
+  fi
+  if ! has_command "$extractor"; then
+    log "Error: Required extraction tool '$extractor' not found; install it and retry"
     return 1
   fi
 
-  # Make binary executable
-  chmod +x "$target_dir/junie" 2>/dev/null || true
+  # Staging path lives inside $VERSIONS_DIR so the final `mv` is a same-filesystem rename.
+  local staging="$VERSIONS_DIR/.$version.tmp.$$"
+  local old_dir="$VERSIONS_DIR/.$version.old.$$"
 
-  # Remove quarantine on macOS
-  xattr -dr com.apple.quarantine "$target_dir" 2>/dev/null || true
+  # Catch signals during extraction so Ctrl-C / SIGTERM doesn't leave a partial
+  # staging dir behind. (EXIT trap is not reliable for *function* returns, so we
+  # also do explicit cleanup before every error return below.)
+  # shellcheck disable=SC2064
+  trap "rm -rf \"$staging\" \"$old_dir\"; trap - INT TERM; exit 130" INT TERM
 
-  # Update current symlink atomically
-  ln -sfn "$target_dir" "$CURRENT_LINK"
+  rm -rf "$staging"
+  if ! mkdir -p "$staging"; then
+    log "Error: Failed to create staging directory $staging"
+    trap - INT TERM
+    return 1
+  fi
 
-  # Cleanup
+  log "Extracting to $staging..."
+
+  if [[ "$extractor" == "unzip" ]]; then
+    if ! unzip -q "$zip_path" -d "$staging"; then
+      log "Error: Failed to extract $zip_path; preserving update for retry"
+      rm -rf "$staging"
+      trap - INT TERM
+      return 1
+    fi
+  else
+    if ! tar -xzf "$zip_path" -C "$staging"; then
+      log "Error: Failed to extract $zip_path; preserving update for retry"
+      rm -rf "$staging"
+      trap - INT TERM
+      return 1
+    fi
+  fi
+
+  # Resolve the binary against the staging dir and ensure it is executable.
+  local staged_binary
+  staged_binary=$(get_binary_path_in "$staging")
+  if [[ -z "$staged_binary" ]]; then
+    log "Error: No junie binary found in extracted payload; preserving update for retry"
+    rm -rf "$staging"
+    trap - INT TERM
+    return 1
+  fi
+  chmod +x "$staged_binary" 2>/dev/null || true
+  if [[ ! -x "$staged_binary" ]]; then
+    log "Error: Extracted binary is not executable: $staged_binary"
+    rm -rf "$staging"
+    trap - INT TERM
+    return 1
+  fi
+
+  # Remove quarantine on macOS (best-effort)
+  xattr -dr com.apple.quarantine "$staging" 2>/dev/null || true
+
+  # Atomic swap: move existing version aside, then rename staging into place.
+  # We replace the whole tree so macOS .app bundles stay code-sign-consistent.
+  if [[ -e "$VERSIONS_DIR/$version" ]]; then
+    rm -rf "$old_dir"
+    if ! mv "$VERSIONS_DIR/$version" "$old_dir"; then
+      log "Error: Failed to move existing version aside"
+      rm -rf "$staging"
+      trap - INT TERM
+      return 1
+    fi
+  fi
+
+  if ! mv "$staging" "$VERSIONS_DIR/$version"; then
+    log "Error: Failed to install new version into $VERSIONS_DIR/$version"
+    # Try to restore previous version if we moved it aside
+    if [[ -e "$old_dir" && ! -e "$VERSIONS_DIR/$version" ]]; then
+      mv "$old_dir" "$VERSIONS_DIR/$version" 2>/dev/null || true
+    fi
+    rm -rf "$staging" "$old_dir"
+    trap - INT TERM
+    return 1
+  fi
+
+  # Best-effort cleanup of the previous tree
+  rm -rf "$old_dir" 2>/dev/null || true
+
+  # Flip the current symlink atomically.
+  ln -sfn "$VERSIONS_DIR/$version" "$CURRENT_LINK"
+
+  # Drop pending artifacts only after a fully successful swap.
   rm -f "$zip_path" "$PENDING_UPDATE"
 
+  trap - INT TERM
+
   log "Updated to version $version"
+  return 0
 }
 
 # === Resolve Version ===
@@ -330,7 +347,10 @@ handle_shim_commands() {
           current_version=$(basename "$(readlink "$CURRENT_LINK")")
         fi
         for v in "$VERSIONS_DIR"/*/; do
-          local vname=$(basename "$v")
+          local vname
+          vname=$(basename "$v")
+          # Skip transient staging dirs (.<v>.tmp.<pid>, .<v>.old.<pid>) defensively.
+          case "$vname" in .*) continue ;; esac
           if [[ "$vname" == "$current_version" ]]; then
             echo "  $vname (current)"
           else
@@ -360,8 +380,11 @@ main() {
   # Handle shim-specific commands
   handle_shim_commands "$@"
 
-  # Apply pending update if exists
-  apply_pending_update || true
+  # Apply pending update if present. On failure we deliberately do NOT abort:
+  # the previous version is still on disk (via the `current` symlink) and should run.
+  if ! apply_pending_update; then
+    log "Update not applied; continuing with current version"
+  fi
 
   # Resolve which version to run
   local version
@@ -389,113 +412,3 @@ main() {
 }
 
 main "$@"
-SHIM_EOF
-chmod +x "$JUNIE_BIN/junie"
-
-# Download and install binary
-TARGET_DIR="$JUNIE_DATA/versions/$VERSION"
-if [[ ! -d "$TARGET_DIR" ]]; then
-  TMP_ZIP=$(mktemp)
-
-  log "Downloading $DOWNLOAD_URL"
-  curl -fSL --progress-bar -o "$TMP_ZIP" "$DOWNLOAD_URL"
-
-  # Verify checksum
-  if [[ -n "$SHA256" ]]; then
-    actual_sha256=$(sha256sum_file "$TMP_ZIP")
-    if [[ -n "$actual_sha256" ]]; then
-      if ! echo "$actual_sha256" | grep -qi "^${SHA256}$"; then
-        log_error "Checksum verification failed!"
-        log_error "Expected: $SHA256"
-        log_error "Got: $actual_sha256"
-        rm -f "$TMP_ZIP"
-        exit 1
-      fi
-      log "Checksum verified"
-    fi
-  fi
-
-  mkdir -p "$TARGET_DIR"
-  unzip -q -o "$TMP_ZIP" -d "$TARGET_DIR"
-  rm -f "$TMP_ZIP"
-
-  [[ "$OS_NAME" == "macos" ]] && xattr -dr com.apple.quarantine "$TARGET_DIR" 2>/dev/null || true
-fi
-
-# Set current version
-ln -sfn "$TARGET_DIR" "$JUNIE_DATA/current"
-
-log "Installed successfully!"
-
-# Returns 0 if PATH was already set or profile was updated.
-# Returns 1 if profile could not be updated (caller shows manual instructions).
-add_to_path() {
-  case ":$PATH:" in
-    *":$HOME/.local/bin:"*) return 0 ;;
-  esac
-
-  local shell_name export_line profile_files profile_dir
-  shell_name=$(basename "${SHELL:-}" 2>/dev/null || echo "")
-  export_line='export PATH="$HOME/.local/bin:$PATH"'
-
-  case "$shell_name" in
-    zsh)
-      # .zshrc is preferred; .zprofile is the fallback (also sourced by login shells)
-      profile_files="$HOME/.zshrc $HOME/.zprofile"
-      ;;
-    bash)
-      # macOS terminals open login shells (.bash_profile); Linux terminals open non-login shells (.bashrc)
-      if [[ "$OS_NAME" == "macos" ]]; then
-        profile_files="$HOME/.bash_profile $HOME/.profile"
-      else
-        profile_files="$HOME/.bashrc $HOME/.profile"
-      fi
-      ;;
-    fish)
-      profile_files="$HOME/.config/fish/config.fish"
-      export_line='fish_add_path "$HOME/.local/bin"'
-      ;;
-    *)
-      profile_files="$HOME/.profile"
-      ;;
-  esac
-
-  local file
-  for file in $profile_files; do
-    if [[ -f "$file" ]] && grep -q '\.local/bin' "$file" 2>/dev/null; then
-      return 0
-    fi
-  done
-
-  for file in $profile_files; do
-    profile_dir=$(dirname "$file")
-    if [[ ! -d "$profile_dir" ]]; then
-      mkdir -p "$profile_dir" 2>/dev/null || continue
-    fi
-    if { printf '\n%s\n' "$export_line" >> "$file"; } 2>/dev/null; then
-      log "Added $JUNIE_BIN to PATH in $file"
-      return 0
-    fi
-  done
-
-  return 1
-}
-
-if add_to_path; then
-  case ":$PATH:" in
-    *":$HOME/.local/bin:"*)
-      echo ""
-      echo "Run: junie --help"
-      ;;
-    *)
-      echo ""
-      echo "Restart your shell, then run: junie --help"
-      ;;
-  esac
-else
-  echo ""
-  echo "Manually add to your PATH:"
-  echo '  export PATH="$HOME/.local/bin:$PATH"'
-  echo ""
-  echo "Then run: junie --help"
-fi
