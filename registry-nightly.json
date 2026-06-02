@@ -696,7 +696,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "1901.1",
+      "version": "1902.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -707,35 +707,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1901.1/junie-nightly-1901.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1902.1/junie-nightly-1902.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1901.1/junie-nightly-1901.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1902.1/junie-nightly-1902.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1901.1/junie-nightly-1901.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1902.1/junie-nightly-1902.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1901.1/junie-nightly-1901.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1902.1/junie-nightly-1902.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/1901.1/junie-nightly-1901.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/1902.1/junie-nightly-1902.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -748,7 +748,7 @@
     {
       "id": "kilo",
       "name": "Kilo",
-      "version": "7.3.16",
+      "version": "7.3.21",
       "description": "The open source coding agent",
       "repository": "https://github.com/Kilo-Org/kilocode",
       "website": "https://kilo.ai/",
@@ -760,35 +760,35 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.16/kilo-darwin-arm64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.21/kilo-darwin-arm64.zip",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.16/kilo-darwin-x64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.21/kilo-darwin-x64.zip",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.16/kilo-linux-arm64.tar.gz",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.21/kilo-linux-arm64.tar.gz",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.16/kilo-linux-x64.tar.gz",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.21/kilo-linux-x64.tar.gz",
             "cmd": "./kilo",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.16/kilo-windows-x64.zip",
+            "archive": "https://github.com/Kilo-Org/kilocode/releases/download/v7.3.21/kilo-windows-x64.zip",
             "cmd": "./kilo.exe",
             "args": [
               "acp"
@@ -796,7 +796,7 @@
           }
         },
         "npx": {
-          "package": "@kilocode/cli@7.3.16",
+          "package": "@kilocode/cli@7.3.21",
           "args": [
             "acp"
           ]
