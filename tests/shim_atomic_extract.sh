@@ -133,6 +133,38 @@ write_manifest() {
 EOF
 }
 
+# Stub `uname` so the shim's `zip_extractor` resolves zips to `ditto` (Darwin
+# path). Only `uname -s` is overridden; any other invocation defers to the real
+# binary. Pair with `stub_ditto_*` and remove with `unstub_macos`.
+stub_macos_uname() {
+  uname() {
+    if [[ "${1:-}" == "-s" ]]; then echo "Darwin"; return 0; fi
+    command uname "$@"
+  }
+}
+
+# Stub `ditto -x -k SRC DST` to extract via unzip (which CI has), emulating a
+# working macOS ditto. Any other ditto invocation is a no-op success.
+stub_ditto_ok() {
+  ditto() {
+    if [[ "${1:-}" == "-x" && "${2:-}" == "-k" ]]; then
+      unzip -q "$3" -d "$4"
+      return $?
+    fi
+    return 0
+  }
+}
+
+# Stub `ditto` so extraction always fails, emulating a broken/incompatible
+# ditto on macOS (exercises the new ditto branch's fail-and-preserve path).
+stub_ditto_fail() {
+  ditto() { return 1; }
+}
+
+unstub_macos() {
+  unset -f uname ditto 2>/dev/null || true
+}
+
 # Seed a pre-existing version dir, used as "the previous working version".
 seed_version() {
   local v="$1"; shift
@@ -298,6 +330,58 @@ test_poisoned_manifest() {
   teardown_env
 }
 
+# 9. macOS happy path: zip resolves to `ditto`, bundle swapped, current flipped.
+test_macos_ditto_happy_path() {
+  setup_env "macos_ditto_happy_path"
+  stub_macos_uname
+  stub_ditto_ok
+  seed_version "1.0"
+  local zip="$JUNIE_DATA/updates/u.zip"
+  make_app_zip "$zip"
+  write_manifest "1.1" "$zip"
+
+  # Sanity: on the stubbed-Darwin path a zip must resolve to the ditto extractor.
+  assert '[[ "$(detect_archive_type "$zip")" == "ditto" ]]' "zip must resolve to ditto on macOS" || { unstub_macos; teardown_env; return; }
+
+  apply_pending_update
+  local rc=$?
+
+  assert "[[ $rc -eq 0 ]]" "apply_pending_update should succeed via ditto" || { unstub_macos; teardown_env; return; }
+  assert "[[ -x \"$JUNIE_DATA/versions/1.1/Applications/junie.app/Contents/MacOS/junie\" ]]" "new app binary must exist after ditto extract" || { unstub_macos; teardown_env; return; }
+  assert '[[ "$(readlink "$JUNIE_DATA/current")" == "$JUNIE_DATA/versions/1.1" ]]' "current must point at 1.1" || { unstub_macos; teardown_env; return; }
+  assert "[[ ! -f \"$JUNIE_DATA/updates/pending-update.json\" ]]" "manifest must be deleted after success" || { unstub_macos; teardown_env; return; }
+  assert "[[ ! -f \"$zip\" ]]" "zip must be deleted after success" || { unstub_macos; teardown_env; return; }
+  assert "! ls -A \"$JUNIE_DATA/versions\"/.*.tmp.* > /dev/null 2>&1" "no staging dirs left behind" || { unstub_macos; teardown_env; return; }
+  ok
+  unstub_macos
+  teardown_env
+}
+
+# 10. macOS ditto failure -> no unzip fallback, artifacts preserved for retry.
+test_macos_ditto_failure_preserves_artifacts() {
+  setup_env "macos_ditto_failure"
+  stub_macos_uname
+  stub_ditto_fail
+  seed_version "1.0"
+  local zip="$JUNIE_DATA/updates/u.zip"
+  make_app_zip "$zip"
+  write_manifest "1.1" "$zip"
+
+  apply_pending_update
+  local rc=$?
+
+  assert "[[ $rc -ne 0 ]]" "apply_pending_update must fail when ditto fails" || { unstub_macos; teardown_env; return; }
+  assert "[[ ! -d \"$JUNIE_DATA/versions/1.1\" ]]" "no partial 1.1 dir must be created" || { unstub_macos; teardown_env; return; }
+  assert "[[ -x \"$JUNIE_DATA/versions/1.0/junie/bin/junie\" ]]" "previous version must remain intact" || { unstub_macos; teardown_env; return; }
+  assert '[[ "$(readlink "$JUNIE_DATA/current")" == "$JUNIE_DATA/versions/1.0" ]]' "current must still point at 1.0" || { unstub_macos; teardown_env; return; }
+  assert "[[ -f \"$JUNIE_DATA/updates/pending-update.json\" ]]" "manifest must be preserved for retry" || { unstub_macos; teardown_env; return; }
+  assert "[[ -f \"$zip\" ]]" "zip must be preserved for retry" || { unstub_macos; teardown_env; return; }
+  assert "! ls -A \"$JUNIE_DATA/versions\"/.*.tmp.* > /dev/null 2>&1" "no staging dirs left behind" || { unstub_macos; teardown_env; return; }
+  ok
+  unstub_macos
+  teardown_env
+}
+
 # 8. No pending update -> no-op success
 test_no_pending_update() {
   setup_env "no_pending_update"
@@ -319,6 +403,8 @@ test_corrupt_zip_preserves_artifacts
 test_missing_unzip_tool
 test_validation_failure_no_binary
 test_poisoned_manifest
+test_macos_ditto_happy_path
+test_macos_ditto_failure_preserves_artifacts
 test_no_pending_update
 
 echo ""
