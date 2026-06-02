@@ -113,18 +113,32 @@ get_binary_path() {
   get_binary_path_in "$VERSIONS_DIR/$version"
 }
 
+# Pick the zip extractor for the current OS. On macOS we must use `ditto`
+# (Apple's archive tool) so notarized/code-signed .app bundles are
+# reconstructed exactly -- symlinks, permissions, and extended attributes
+# intact. Info-ZIP `unzip` mangles those and breaks the signature seal, which
+# on Apple Silicon yields "is damaged and cannot be opened." On Linux we keep
+# `unzip`.
+zip_extractor() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    echo "ditto"
+  else
+    echo "unzip"
+  fi
+}
+
 # Detect the archive type of $1 by extension or magic bytes.
-# Echoes "unzip", "tar", or "" if unknown.
+# Echoes the zip extractor ("unzip" or "ditto"), "tar", or "" if unknown.
 detect_archive_type() {
   local file="$1"
   case "$file" in
-    *.zip|*.ZIP) echo "unzip"; return 0 ;;
+    *.zip|*.ZIP) zip_extractor; return 0 ;;
     *.tar.gz|*.tgz|*.TAR.GZ|*.TGZ) echo "tar"; return 0 ;;
   esac
   local magic
   magic=$(head -c 4 "$file" 2>/dev/null | od -An -tx1 | tr -d ' \n' 2>/dev/null || echo "")
   case "$magic" in
-    504b0304*|504b0506*|504b0708*) echo "unzip" ;;
+    504b0304*|504b0506*|504b0708*) zip_extractor ;;
     1f8b*)                          echo "tar"   ;;
     *)                              echo ""      ;;
   esac
@@ -274,6 +288,17 @@ apply_pending_update() {
     if ! unzip -q "$zip_path" -d "$staging"; then
       log_both "Error: Failed to extract $zip_path; preserving update for retry"
       log_upgrade "extract: FAIL (unzip exit non-zero)"
+      rm -rf "$staging"
+      trap - INT TERM
+      return 1
+    fi
+  elif [[ "$extractor" == "ditto" ]]; then
+    # macOS: use ditto so the signed .app bundle is reconstructed exactly.
+    # No unzip fallback -- on failure we preserve the update for retry to
+    # avoid installing a structurally broken (and thus "damaged") bundle.
+    if ! ditto -x -k "$zip_path" "$staging"; then
+      log_both "Error: Failed to extract $zip_path; preserving update for retry"
+      log_upgrade "extract: FAIL (ditto exit non-zero)"
       rm -rf "$staging"
       trap - INT TERM
       return 1

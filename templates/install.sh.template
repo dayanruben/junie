@@ -18,18 +18,30 @@ JUNIE_DATA="$HOME/.local/share/junie"
 log() { echo "[Junie] $*"; }
 log_error() { echo "[Junie] ERROR: $*" >&2; }
 
-# Ensure required tools are available before we start downloading anything.
-# We fail early with an actionable, OS-aware install hint so users on minimal
-# images (containers, fresh VPS, etc.) aren't stuck staring at a cryptic
-# `unzip: command not found` halfway through the install.
-require_unzip() {
+# Ensure the required archive extractor is available before we start downloading
+# anything. We fail early with an actionable, OS-aware install hint so users on
+# minimal images (containers, fresh VPS, etc.) aren't stuck staring at a cryptic
+# `command not found` halfway through the install.
+#
+# On macOS we require `ditto` (Apple's archive tool, part of the base install)
+# so notarized/code-signed .app bundles are reconstructed exactly. Info-ZIP
+# `unzip` mangles symlinks/permissions/xattrs and breaks the signature seal,
+# which on Apple Silicon yields "is damaged and cannot be opened." On Linux we
+# require `unzip`.
+require_extractor() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    if command -v ditto > /dev/null 2>&1; then
+      return 0
+    fi
+    log_error "'ditto' is required to install Junie on macOS, but it was not found in PATH."
+    log_error "'ditto' ships with macOS at /usr/bin/ditto; ensure /usr/bin is on your PATH and re-run this installer."
+    exit 1
+  fi
   if command -v unzip > /dev/null 2>&1; then
     return 0
   fi
   log_error "'unzip' is required to install Junie, but it was not found in PATH."
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    log_error "Install it with: brew install unzip"
-  elif command -v apt-get > /dev/null 2>&1; then
+  if command -v apt-get > /dev/null 2>&1; then
     log_error "Install it with: sudo apt-get update && sudo apt-get install -y unzip"
   elif command -v dnf > /dev/null 2>&1; then
     log_error "Install it with: sudo dnf install -y unzip"
@@ -46,7 +58,7 @@ require_unzip() {
   fi
   exit 1
 }
-require_unzip
+require_extractor
 
 # Calculate SHA-256 checksum
 sha256sum_file() {
@@ -186,7 +198,13 @@ STAGING="$JUNIE_DATA/versions/.$VERSION.tmp.$$"
 trap 'rm -rf "$STAGING"' EXIT INT TERM
 rm -rf "$STAGING"
 mkdir -p "$STAGING"
-unzip -q "$TMP_ZIP" -d "$STAGING"
+# On macOS use ditto so the signed .app bundle is reconstructed exactly;
+# on Linux use unzip. (See require_extractor above for the rationale.)
+if [[ "$OS_NAME" == "macos" ]]; then
+  ditto -x -k "$TMP_ZIP" "$STAGING"
+else
+  unzip -q "$TMP_ZIP" -d "$STAGING"
+fi
 rm -f "$TMP_ZIP"
 
 # Validate the extracted binary (inline equivalent of get_binary_path_in).

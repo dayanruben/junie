@@ -19,18 +19,30 @@ JUNIE_DATA="$HOME/.local/share/junie"
 log() { echo "[Junie] $*"; }
 log_error() { echo "[Junie] ERROR: $*" >&2; }
 
-# Ensure required tools are available before we start downloading anything.
-# We fail early with an actionable, OS-aware install hint so users on minimal
-# images (containers, fresh VPS, etc.) aren't stuck staring at a cryptic
-# `unzip: command not found` halfway through the install.
-require_unzip() {
+# Ensure the required archive extractor is available before we start downloading
+# anything. We fail early with an actionable, OS-aware install hint so users on
+# minimal images (containers, fresh VPS, etc.) aren't stuck staring at a cryptic
+# `command not found` halfway through the install.
+#
+# On macOS we require `ditto` (Apple's archive tool, part of the base install)
+# so notarized/code-signed .app bundles are reconstructed exactly. Info-ZIP
+# `unzip` mangles symlinks/permissions/xattrs and breaks the signature seal,
+# which on Apple Silicon yields "is damaged and cannot be opened." On Linux we
+# require `unzip`.
+require_extractor() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    if command -v ditto > /dev/null 2>&1; then
+      return 0
+    fi
+    log_error "'ditto' is required to install Junie on macOS, but it was not found in PATH."
+    log_error "'ditto' ships with macOS at /usr/bin/ditto; ensure /usr/bin is on your PATH and re-run this installer."
+    exit 1
+  fi
   if command -v unzip > /dev/null 2>&1; then
     return 0
   fi
   log_error "'unzip' is required to install Junie, but it was not found in PATH."
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    log_error "Install it with: brew install unzip"
-  elif command -v apt-get > /dev/null 2>&1; then
+  if command -v apt-get > /dev/null 2>&1; then
     log_error "Install it with: sudo apt-get update && sudo apt-get install -y unzip"
   elif command -v dnf > /dev/null 2>&1; then
     log_error "Install it with: sudo dnf install -y unzip"
@@ -47,7 +59,7 @@ require_unzip() {
   fi
   exit 1
 }
-require_unzip
+require_extractor
 
 # Calculate SHA-256 checksum
 sha256sum_file() {
@@ -266,18 +278,32 @@ get_binary_path() {
   get_binary_path_in "$VERSIONS_DIR/$version"
 }
 
+# Pick the zip extractor for the current OS. On macOS we must use `ditto`
+# (Apple's archive tool) so notarized/code-signed .app bundles are
+# reconstructed exactly -- symlinks, permissions, and extended attributes
+# intact. Info-ZIP `unzip` mangles those and breaks the signature seal, which
+# on Apple Silicon yields "is damaged and cannot be opened." On Linux we keep
+# `unzip`.
+zip_extractor() {
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    echo "ditto"
+  else
+    echo "unzip"
+  fi
+}
+
 # Detect the archive type of $1 by extension or magic bytes.
-# Echoes "unzip", "tar", or "" if unknown.
+# Echoes the zip extractor ("unzip" or "ditto"), "tar", or "" if unknown.
 detect_archive_type() {
   local file="$1"
   case "$file" in
-    *.zip|*.ZIP) echo "unzip"; return 0 ;;
+    *.zip|*.ZIP) zip_extractor; return 0 ;;
     *.tar.gz|*.tgz|*.TAR.GZ|*.TGZ) echo "tar"; return 0 ;;
   esac
   local magic
   magic=$(head -c 4 "$file" 2>/dev/null | od -An -tx1 | tr -d ' \n' 2>/dev/null || echo "")
   case "$magic" in
-    504b0304*|504b0506*|504b0708*) echo "unzip" ;;
+    504b0304*|504b0506*|504b0708*) zip_extractor ;;
     1f8b*)                          echo "tar"   ;;
     *)                              echo ""      ;;
   esac
@@ -427,6 +453,17 @@ apply_pending_update() {
     if ! unzip -q "$zip_path" -d "$staging"; then
       log_both "Error: Failed to extract $zip_path; preserving update for retry"
       log_upgrade "extract: FAIL (unzip exit non-zero)"
+      rm -rf "$staging"
+      trap - INT TERM
+      return 1
+    fi
+  elif [[ "$extractor" == "ditto" ]]; then
+    # macOS: use ditto so the signed .app bundle is reconstructed exactly.
+    # No unzip fallback -- on failure we preserve the update for retry to
+    # avoid installing a structurally broken (and thus "damaged") bundle.
+    if ! ditto -x -k "$zip_path" "$staging"; then
+      log_both "Error: Failed to extract $zip_path; preserving update for retry"
+      log_upgrade "extract: FAIL (ditto exit non-zero)"
       rm -rf "$staging"
       trap - INT TERM
       return 1
@@ -689,7 +726,13 @@ STAGING="$JUNIE_DATA/versions/.$VERSION.tmp.$$"
 trap 'rm -rf "$STAGING"' EXIT INT TERM
 rm -rf "$STAGING"
 mkdir -p "$STAGING"
-unzip -q "$TMP_ZIP" -d "$STAGING"
+# On macOS use ditto so the signed .app bundle is reconstructed exactly;
+# on Linux use unzip. (See require_extractor above for the rationale.)
+if [[ "$OS_NAME" == "macos" ]]; then
+  ditto -x -k "$TMP_ZIP" "$STAGING"
+else
+  unzip -q "$TMP_ZIP" -d "$STAGING"
+fi
 rm -f "$TMP_ZIP"
 
 # Validate the extracted binary (inline equivalent of get_binary_path_in).
