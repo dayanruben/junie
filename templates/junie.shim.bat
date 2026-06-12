@@ -33,7 +33,7 @@ set "PROCESSING=%UPDATES_DIR%\pending-update.json.processing"
 ::: binary's own update path with CWD as a working-dir hint.
 if exist "%PENDING_UPDATE%" (
   set "PEND_OK="
-  for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "try { $c = Get-Content -Raw -LiteralPath '%PENDING_UPDATE%' -ErrorAction Stop; if ([string]::IsNullOrWhiteSpace($c)) { 'bad' } else { $j = $c ^| ConvertFrom-Json; if ($j.version -and $j.zipPath) { 'ok' } else { 'bad' } } } catch { 'bad' }"`) do set "PEND_OK=%%V"
+  for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "try { $c = Get-Content -Raw -LiteralPath '%PENDING_UPDATE%' -ErrorAction Stop; if ([string]::IsNullOrWhiteSpace($c)) { 'bad' } else { $j = $c | ConvertFrom-Json; if ($j.version -and $j.zipPath) { 'ok' } else { 'bad' } } } catch { 'bad' }"`) do set "PEND_OK=%%V"
   if /i not "!PEND_OK!"=="ok" (
     echo [Junie] Removing invalid update artifact: %PENDING_UPDATE% 1>&2
     del /f /q "%PENDING_UPDATE%" 2>nul
@@ -41,7 +41,7 @@ if exist "%PENDING_UPDATE%" (
 )
 if exist "!PROCESSING!" (
   set "PROC_OK="
-  for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "try { $c = Get-Content -Raw -LiteralPath '!PROCESSING!' -ErrorAction Stop; if ([string]::IsNullOrWhiteSpace($c)) { 'bad' } else { $j = $c ^| ConvertFrom-Json; if ($j.version -and $j.zipPath) { 'ok' } else { 'bad' } } } catch { 'bad' }"`) do set "PROC_OK=%%V"
+  for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "try { $c = Get-Content -Raw -LiteralPath '!PROCESSING!' -ErrorAction Stop; if ([string]::IsNullOrWhiteSpace($c)) { 'bad' } else { $j = $c | ConvertFrom-Json; if ($j.version -and $j.zipPath) { 'ok' } else { 'bad' } } } catch { 'bad' }"`) do set "PROC_OK=%%V"
   if /i not "!PROC_OK!"=="ok" (
     echo [Junie] Removing invalid update artifact: !PROCESSING! 1>&2
     del /f /q "!PROCESSING!" 2>nul
