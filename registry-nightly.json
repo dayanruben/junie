@@ -431,6 +431,64 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/deepagents.svg"
     },
     {
+      "id": "devin",
+      "name": "Devin",
+      "version": "2026.5.26",
+      "description": "Devin CLI coding agent by Cognition",
+      "website": "https://docs.devin.ai/cli",
+      "authors": [
+        "Cognition"
+      ],
+      "license": "proprietary",
+      "distribution": {
+        "binary": {
+          "darwin-aarch64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-aarch64-apple-darwin.tar.gz",
+            "cmd": "./bin/devin",
+            "args": [
+              "acp"
+            ]
+          },
+          "darwin-x86_64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-x86_64-apple-darwin.tar.gz",
+            "cmd": "./bin/devin",
+            "args": [
+              "acp"
+            ]
+          },
+          "linux-aarch64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-aarch64-unknown-linux.tar.gz",
+            "cmd": "./bin/devin",
+            "args": [
+              "acp"
+            ]
+          },
+          "linux-x86_64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-x86_64-unknown-linux.tar.gz",
+            "cmd": "./bin/devin",
+            "args": [
+              "acp"
+            ]
+          },
+          "windows-aarch64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-aarch64-pc-windows.zip",
+            "cmd": ".\\bin\\devin.exe",
+            "args": [
+              "acp"
+            ]
+          },
+          "windows-x86_64": {
+            "archive": "https://static.devin.ai/cli/2026.5.26-8/devin-2026.5.26-8-x86_64-pc-windows.zip",
+            "cmd": ".\\bin\\devin.exe",
+            "args": [
+              "acp"
+            ]
+          }
+        }
+      },
+      "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/devin.svg"
+    },
+    {
       "id": "dimcode",
       "name": "DimCode",
       "version": "0.2.2",
@@ -696,7 +754,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2022.1",
+      "version": "2023.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -707,42 +765,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2022.1/junie-nightly-2022.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2023.1/junie-nightly-2023.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
