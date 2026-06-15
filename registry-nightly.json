@@ -690,7 +690,7 @@
     {
       "id": "grok-build",
       "name": "Grok Build",
-      "version": "0.2.20",
+      "version": "0.2.39",
       "description": "xAI's coding agent and CLI",
       "website": "https://x.ai/cli",
       "authors": [
@@ -698,55 +698,12 @@
       ],
       "license": "proprietary",
       "distribution": {
-        "binary": {
-          "darwin-aarch64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-macos-aarch64",
-            "cmd": "./grok-0.2.20-macos-aarch64",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          },
-          "darwin-x86_64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-macos-x86_64",
-            "cmd": "./grok-0.2.20-macos-x86_64",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          },
-          "linux-aarch64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-linux-aarch64",
-            "cmd": "./grok-0.2.20-linux-aarch64",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          },
-          "linux-x86_64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-linux-x86_64",
-            "cmd": "./grok-0.2.20-linux-x86_64",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          },
-          "windows-aarch64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-windows-aarch64.exe",
-            "cmd": "./grok-0.2.20-windows-aarch64.exe",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          },
-          "windows-x86_64": {
-            "archive": "https://x.ai/cli/grok-0.2.20-windows-x86_64.exe",
-            "cmd": "./grok-0.2.20-windows-x86_64.exe",
-            "args": [
-              "agent",
-              "stdio"
-            ]
-          }
+        "npx": {
+          "package": "@xai-official/grok@0.2.39",
+          "args": [
+            "agent",
+            "stdio"
+          ]
         }
       },
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/grok-build.svg"
@@ -754,7 +711,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2030.1",
+      "version": "2031.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -765,42 +722,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2030.1/junie-nightly-2030.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2031.1/junie-nightly-2031.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
