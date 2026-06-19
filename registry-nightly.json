@@ -712,7 +712,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2120.1",
+      "version": "2121.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -723,42 +723,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2120.1/junie-nightly-2120.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2121.1/junie-nightly-2121.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -901,7 +901,7 @@
     {
       "id": "mistral-vibe",
       "name": "Mistral Vibe",
-      "version": "2.17.0",
+      "version": "2.17.1",
       "description": "Mistral's open-source coding assistant",
       "repository": "https://github.com/mistralai/mistral-vibe",
       "website": "https://mistral.ai/products/vibe",
@@ -913,23 +913,23 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.0/vibe-acp-darwin-aarch64-2.17.0.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.1/vibe-acp-darwin-aarch64-2.17.1.zip",
             "cmd": "./vibe-acp"
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.0/vibe-acp-darwin-x86_64-2.17.0.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.1/vibe-acp-darwin-x86_64-2.17.1.zip",
             "cmd": "./vibe-acp"
           },
           "linux-aarch64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.0/vibe-acp-linux-aarch64-2.17.0.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.1/vibe-acp-linux-aarch64-2.17.1.zip",
             "cmd": "./vibe-acp"
           },
           "linux-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.0/vibe-acp-linux-x86_64-2.17.0.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.1/vibe-acp-linux-x86_64-2.17.1.zip",
             "cmd": "./vibe-acp"
           },
           "windows-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.0/vibe-acp-windows-x86_64-2.17.0.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.17.1/vibe-acp-windows-x86_64-2.17.1.zip",
             "cmd": "./vibe-acp.exe"
           }
         }
@@ -1035,7 +1035,7 @@
     {
       "id": "poolside",
       "name": "Poolside",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "description": "Poolside's coding agent",
       "repository": "https://github.com/poolsideai/pool",
       "website": "https://poolside.ai",
@@ -1046,42 +1046,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-darwin-arm64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-darwin-arm64.tar.gz",
             "cmd": "./pool-darwin-arm64",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-darwin-amd64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-darwin-amd64.tar.gz",
             "cmd": "./pool-darwin-amd64",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-linux-arm64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-linux-arm64.tar.gz",
             "cmd": "./pool-linux-arm64",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-linux-amd64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-linux-amd64.tar.gz",
             "cmd": "./pool-linux-amd64",
             "args": [
               "acp"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-windows-arm64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-windows-arm64.tar.gz",
             "cmd": "./pool-windows-arm64.exe",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://downloads.poolside.ai/pool/v1.0.5/pool-windows-amd64.tar.gz",
+            "archive": "https://downloads.poolside.ai/pool/v1.0.6/pool-windows-amd64.tar.gz",
             "cmd": "./pool-windows-amd64.exe",
             "args": [
               "acp"
