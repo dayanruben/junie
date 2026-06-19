@@ -61,7 +61,7 @@
     {
       "id": "auggie",
       "name": "Auggie CLI",
-      "version": "0.29.0",
+      "version": "0.30.0",
       "description": "Augment Code's powerful software agent, backed by industry-leading context engine",
       "repository": "https://github.com/augmentcode/auggie",
       "website": "https://www.augmentcode.com/",
@@ -72,7 +72,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/auggie.svg",
       "distribution": {
         "npx": {
-          "package": "@augmentcode/auggie@0.29.0",
+          "package": "@augmentcode/auggie@0.30.0",
           "args": [
             "--acp"
           ],
@@ -433,7 +433,7 @@
     {
       "id": "devin",
       "name": "Devin",
-      "version": "2026.7.19",
+      "version": "2026.7.23",
       "description": "Devin CLI coding agent by Cognition",
       "website": "https://docs.devin.ai/cli",
       "authors": [
@@ -444,42 +444,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-aarch64-apple-darwin.tar.gz",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-aarch64-apple-darwin.tar.gz",
             "cmd": "./bin/devin",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-x86_64-apple-darwin.tar.gz",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-x86_64-apple-darwin.tar.gz",
             "cmd": "./bin/devin",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-aarch64-unknown-linux.tar.gz",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-aarch64-unknown-linux.tar.gz",
             "cmd": "./bin/devin",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-x86_64-unknown-linux.tar.gz",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-x86_64-unknown-linux.tar.gz",
             "cmd": "./bin/devin",
             "args": [
               "acp"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-aarch64-pc-windows.zip",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-aarch64-pc-windows.zip",
             "cmd": "./bin\\devin.exe",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://static.devin.ai/cli/2026.7.19/devin-2026.7.19-x86_64-pc-windows.zip",
+            "archive": "https://static.devin.ai/cli/2026.7.23/devin-2026.7.23-x86_64-pc-windows.zip",
             "cmd": "./bin\\devin.exe",
             "args": [
               "acp"
@@ -512,7 +512,7 @@
     {
       "id": "dirac",
       "name": "Dirac",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "description": "Reduces API costs by more than 50%, produces better and faster work. Uses Hash anchored parallel edits, AST manipulation and a whole lot of neat optimizations. Fully Open Source.",
       "repository": "https://github.com/dirac-run/dirac",
       "website": "https://dirac.run",
@@ -523,7 +523,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
       "distribution": {
         "npx": {
-          "package": "dirac-cli@0.4.0",
+          "package": "dirac-cli@0.4.1",
           "args": [
             "--acp"
           ]
@@ -533,7 +533,7 @@
     {
       "id": "factory-droid",
       "name": "Factory Droid",
-      "version": "0.151.0",
+      "version": "0.153.0",
       "description": "Factory Droid - AI coding agent powered by Factory AI",
       "website": "https://factory.ai/product/cli",
       "authors": [
@@ -542,7 +542,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "droid@0.151.0",
+          "package": "droid@0.153.0",
           "args": [
             "exec",
             "--output-format",
@@ -691,7 +691,7 @@
     {
       "id": "grok-build",
       "name": "Grok Build",
-      "version": "0.2.57",
+      "version": "0.2.58",
       "description": "xAI's coding agent and CLI",
       "website": "https://x.ai/cli",
       "authors": [
@@ -700,7 +700,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@xai-official/grok@0.2.57",
+          "package": "@xai-official/grok@0.2.58",
           "args": [
             "agent",
             "stdio"
@@ -712,7 +712,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2101.1",
+      "version": "2105.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -723,42 +723,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2101.1/junie-nightly-2101.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2105.1/junie-nightly-2105.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
