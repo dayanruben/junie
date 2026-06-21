@@ -122,7 +122,7 @@
     {
       "id": "cline",
       "name": "Cline",
-      "version": "3.0.28",
+      "version": "3.0.29",
       "description": "Autonomous coding agent CLI - capable of creating/editing files, running commands, using the browser, and more",
       "repository": "https://github.com/cline/cline",
       "website": "https://cline.bot/cli",
@@ -133,7 +133,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cline.svg",
       "distribution": {
         "npx": {
-          "package": "cline@3.0.28",
+          "package": "cline@3.0.29",
           "args": [
             "--acp"
           ]
@@ -512,7 +512,7 @@
     {
       "id": "dirac",
       "name": "Dirac",
-      "version": "0.4.1",
+      "version": "0.4.3",
       "description": "Reduces API costs by more than 50%, produces better and faster work. Uses Hash anchored parallel edits, AST manipulation and a whole lot of neat optimizations. Fully Open Source.",
       "repository": "https://github.com/dirac-run/dirac",
       "website": "https://dirac.run",
@@ -523,7 +523,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
       "distribution": {
         "npx": {
-          "package": "dirac-cli@0.4.1",
+          "package": "dirac-cli@0.4.3",
           "args": [
             "--acp"
           ]
@@ -559,7 +559,7 @@
     {
       "id": "fast-agent",
       "name": "fast-agent",
-      "version": "0.7.20",
+      "version": "0.7.21",
       "description": "Code and build agents with comprehensive multi-provider support",
       "repository": "https://github.com/evalstate/fast-agent",
       "website": "https://fast-agent.ai",
@@ -569,7 +569,7 @@
       "license": "Apache 2.0",
       "distribution": {
         "uvx": {
-          "package": "fast-agent-acp==0.7.20",
+          "package": "fast-agent-acp==0.7.21",
           "args": [
             "-x"
           ]
@@ -691,7 +691,7 @@
     {
       "id": "grok-build",
       "name": "Grok Build",
-      "version": "0.2.59",
+      "version": "0.2.60",
       "description": "xAI's coding agent and CLI",
       "website": "https://x.ai/cli",
       "authors": [
@@ -700,7 +700,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@xai-official/grok@0.2.59",
+          "package": "@xai-official/grok@0.2.60",
           "args": [
             "agent",
             "stdio"
@@ -712,7 +712,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2122.1",
+      "version": "2124.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -723,42 +723,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2122.1/junie-nightly-2122.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2124.1/junie-nightly-2124.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -959,7 +959,7 @@
     {
       "id": "opencode",
       "name": "OpenCode",
-      "version": "1.17.8",
+      "version": "1.17.9",
       "description": "The open source coding agent",
       "repository": "https://github.com/anomalyco/opencode",
       "website": "https://opencode.ai",
@@ -971,42 +971,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-darwin-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-darwin-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-darwin-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-darwin-x64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-linux-arm64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-linux-arm64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-linux-x64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-linux-x64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-windows-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-windows-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.8/opencode-windows-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-windows-x64.zip",
             "cmd": "./opencode.exe",
             "args": [
               "acp"
@@ -1114,7 +1114,7 @@
     {
       "id": "qwen-code",
       "name": "Qwen Code",
-      "version": "0.18.3",
+      "version": "0.18.5",
       "description": "Alibaba's Qwen coding assistant",
       "repository": "https://github.com/QwenLM/qwen-code",
       "website": "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
@@ -1124,7 +1124,7 @@
       "license": "Apache-2.0",
       "distribution": {
         "npx": {
-          "package": "@qwen-code/qwen-code@0.18.3",
+          "package": "@qwen-code/qwen-code@0.18.5",
           "args": [
             "--acp",
             "--experimental-skills"
