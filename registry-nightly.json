@@ -487,7 +487,7 @@
     {
       "id": "dirac",
       "name": "Dirac",
-      "version": "0.4.8",
+      "version": "0.4.9",
       "description": "Reduces API costs by more than 50%, produces better and faster work. Uses Hash anchored parallel edits, AST manipulation and a whole lot of neat optimizations. Fully Open Source.",
       "repository": "https://github.com/dirac-run/dirac",
       "website": "https://dirac.run",
@@ -498,7 +498,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
       "distribution": {
         "npx": {
-          "package": "dirac-cli@0.4.8",
+          "package": "dirac-cli@0.4.9",
           "args": [
             "--acp"
           ]
@@ -508,7 +508,7 @@
     {
       "id": "factory-droid",
       "name": "Factory Droid",
-      "version": "0.157.2",
+      "version": "0.158.0",
       "description": "Factory Droid - AI coding agent powered by Factory AI",
       "website": "https://factory.ai/product/cli",
       "authors": [
@@ -517,7 +517,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "droid@0.157.2",
+          "package": "droid@0.158.0",
           "args": [
             "exec",
             "--output-format",
@@ -576,7 +576,7 @@
     {
       "id": "github-copilot-cli",
       "name": "GitHub Copilot",
-      "version": "1.0.64",
+      "version": "1.0.65",
       "description": "GitHub's AI pair programmer",
       "repository": "https://github.com/github/copilot-cli",
       "website": "https://github.com/features/copilot/cli/",
@@ -586,7 +586,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@github/copilot@1.0.64",
+          "package": "@github/copilot@1.0.65",
           "args": [
             "--acp"
           ]
@@ -687,7 +687,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2161.1",
+      "version": "2162.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -698,42 +698,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2161.1/junie-nightly-2161.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2162.1/junie-nightly-2162.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -913,7 +913,7 @@
     {
       "id": "nova",
       "name": "Nova",
-      "version": "1.1.19",
+      "version": "1.1.20",
       "description": "Nova by Compass AI - a fully-fledged software engineer at your command",
       "repository": "https://github.com/Compass-Agentic-Platform/nova",
       "website": "https://www.compassap.ai/portfolio/nova.html",
@@ -924,7 +924,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/nova.svg",
       "distribution": {
         "npx": {
-          "package": "@compass-ai/nova@1.1.19",
+          "package": "@compass-ai/nova@1.1.20",
           "args": [
             "acp"
           ]
@@ -934,7 +934,7 @@
     {
       "id": "opencode",
       "name": "OpenCode",
-      "version": "1.17.9",
+      "version": "1.17.10",
       "description": "The open source coding agent",
       "repository": "https://github.com/anomalyco/opencode",
       "website": "https://opencode.ai",
@@ -946,42 +946,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-darwin-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-darwin-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-darwin-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-darwin-x64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-linux-arm64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-linux-arm64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-linux-x64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-linux-x64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-windows-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-windows-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.9/opencode-windows-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.10/opencode-windows-x64.zip",
             "cmd": "./opencode.exe",
             "args": [
               "acp"
