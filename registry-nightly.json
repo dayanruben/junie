@@ -534,7 +534,7 @@
     {
       "id": "fast-agent",
       "name": "fast-agent",
-      "version": "0.8.0",
+      "version": "0.8.1",
       "description": "Code and build agents with comprehensive multi-provider support",
       "repository": "https://github.com/evalstate/fast-agent",
       "website": "https://fast-agent.ai",
@@ -544,7 +544,7 @@
       "license": "Apache 2.0",
       "distribution": {
         "uvx": {
-          "package": "fast-agent-acp==0.8.0",
+          "package": "fast-agent-acp==0.8.1",
           "args": [
             "-x"
           ]
@@ -666,7 +666,7 @@
     {
       "id": "grok-build",
       "name": "Grok Build",
-      "version": "0.2.73",
+      "version": "0.2.76",
       "description": "xAI's coding agent and CLI",
       "website": "https://x.ai/cli",
       "authors": [
@@ -675,7 +675,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@xai-official/grok@0.2.73",
+          "package": "@xai-official/grok@0.2.76",
           "args": [
             "agent",
             "stdio"
@@ -687,7 +687,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2204.1",
+      "version": "2205.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -698,42 +698,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2204.1/junie-nightly-2204.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2205.1/junie-nightly-2205.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -913,7 +913,7 @@
     {
       "id": "nova",
       "name": "Nova",
-      "version": "1.1.21",
+      "version": "1.1.22",
       "description": "Nova by Compass AI - a fully-fledged software engineer at your command",
       "repository": "https://github.com/Compass-Agentic-Platform/nova",
       "website": "https://www.compassap.ai/portfolio/nova.html",
@@ -924,7 +924,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/nova.svg",
       "distribution": {
         "npx": {
-          "package": "@compass-ai/nova@1.1.21",
+          "package": "@compass-ai/nova@1.1.22",
           "args": [
             "acp"
           ]
