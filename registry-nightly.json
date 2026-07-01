@@ -103,7 +103,7 @@
     {
       "id": "claude-acp",
       "name": "Claude Agent",
-      "version": "0.53.0",
+      "version": "0.54.1",
       "description": "ACP wrapper for Anthropic's Claude",
       "repository": "https://github.com/agentclientprotocol/claude-agent-acp",
       "authors": [
@@ -114,7 +114,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@agentclientprotocol/claude-agent-acp@0.53.0"
+          "package": "@agentclientprotocol/claude-agent-acp@0.54.1"
         }
       },
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/claude-acp.svg"
@@ -467,7 +467,7 @@
     {
       "id": "dimcode",
       "name": "DimCode",
-      "version": "0.2.12",
+      "version": "0.2.15",
       "description": "A coding agent that puts leading models at your command.",
       "website": "https://dimcode.dev/docs/acp.html",
       "authors": [
@@ -476,7 +476,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "dimcode@0.2.12",
+          "package": "dimcode@0.2.15",
           "args": [
             "acp"
           ]
@@ -534,7 +534,7 @@
     {
       "id": "fast-agent",
       "name": "fast-agent",
-      "version": "0.8.1",
+      "version": "0.8.2",
       "description": "Code and build agents with comprehensive multi-provider support",
       "repository": "https://github.com/evalstate/fast-agent",
       "website": "https://fast-agent.ai",
@@ -544,7 +544,7 @@
       "license": "Apache 2.0",
       "distribution": {
         "uvx": {
-          "package": "fast-agent-acp==0.8.1",
+          "package": "fast-agent-acp==0.8.2",
           "args": [
             "-x"
           ]
@@ -576,7 +576,7 @@
     {
       "id": "github-copilot-cli",
       "name": "GitHub Copilot",
-      "version": "1.0.65",
+      "version": "1.0.67",
       "description": "GitHub's AI pair programmer",
       "repository": "https://github.com/github/copilot-cli",
       "website": "https://github.com/features/copilot/cli/",
@@ -586,7 +586,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@github/copilot@1.0.65",
+          "package": "@github/copilot@1.0.67",
           "args": [
             "--acp"
           ]
@@ -666,7 +666,7 @@
     {
       "id": "grok-build",
       "name": "Grok Build",
-      "version": "0.2.77",
+      "version": "0.2.80",
       "description": "xAI's coding agent and CLI",
       "website": "https://x.ai/cli",
       "authors": [
@@ -675,7 +675,7 @@
       "license": "proprietary",
       "distribution": {
         "npx": {
-          "package": "@xai-official/grok@0.2.77",
+          "package": "@xai-official/grok@0.2.80",
           "args": [
             "agent",
             "stdio"
@@ -687,7 +687,7 @@
     {
       "id": "junie",
       "name": "Junie",
-      "version": "2212.1",
+      "version": "2213.1",
       "description": "AI Coding Agent by JetBrains",
       "repository": "https://github.com/JetBrains/junie",
       "website": "https://junie.jetbrains.com",
@@ -698,42 +698,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-macos-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-macos-aarch64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-macos-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-macos-amd64.zip",
             "cmd": "./Applications/junie.app/Contents/MacOS/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-linux-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-linux-aarch64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-linux-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-linux-amd64.zip",
             "cmd": "./junie-app/bin/junie",
             "args": [
               "--acp=true"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-windows-amd64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-windows-amd64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/JetBrains/junie/releases/download/2212.1/junie-nightly-2212.1-windows-aarch64.zip",
+            "archive": "https://github.com/JetBrains/junie/releases/download/2213.1/junie-nightly-2213.1-windows-aarch64.zip",
             "cmd": "./junie/junie.exe",
             "args": [
               "--acp=true"
@@ -876,7 +876,7 @@
     {
       "id": "mistral-vibe",
       "name": "Mistral Vibe",
-      "version": "2.18.2",
+      "version": "2.18.3",
       "description": "Mistral's open-source coding assistant",
       "repository": "https://github.com/mistralai/mistral-vibe",
       "website": "https://mistral.ai/products/vibe",
@@ -888,23 +888,23 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.2/vibe-acp-darwin-aarch64-2.18.2.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.3/vibe-acp-darwin-aarch64-2.18.3.zip",
             "cmd": "./vibe-acp"
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.2/vibe-acp-darwin-x86_64-2.18.2.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.3/vibe-acp-darwin-x86_64-2.18.3.zip",
             "cmd": "./vibe-acp"
           },
           "linux-aarch64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.2/vibe-acp-linux-aarch64-2.18.2.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.3/vibe-acp-linux-aarch64-2.18.3.zip",
             "cmd": "./vibe-acp"
           },
           "linux-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.2/vibe-acp-linux-x86_64-2.18.2.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.3/vibe-acp-linux-x86_64-2.18.3.zip",
             "cmd": "./vibe-acp"
           },
           "windows-x86_64": {
-            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.2/vibe-acp-windows-x86_64-2.18.2.zip",
+            "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.18.3/vibe-acp-windows-x86_64-2.18.3.zip",
             "cmd": "./vibe-acp.exe"
           }
         }
@@ -913,7 +913,7 @@
     {
       "id": "nova",
       "name": "Nova",
-      "version": "1.1.22",
+      "version": "1.1.23",
       "description": "Nova by Compass AI - a fully-fledged software engineer at your command",
       "repository": "https://github.com/Compass-Agentic-Platform/nova",
       "website": "https://www.compassap.ai/portfolio/nova.html",
@@ -924,7 +924,7 @@
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/nova.svg",
       "distribution": {
         "npx": {
-          "package": "@compass-ai/nova@1.1.22",
+          "package": "@compass-ai/nova@1.1.23",
           "args": [
             "acp"
           ]
@@ -934,7 +934,7 @@
     {
       "id": "opencode",
       "name": "OpenCode",
-      "version": "1.17.11",
+      "version": "1.17.12",
       "description": "The open source coding agent",
       "repository": "https://github.com/anomalyco/opencode",
       "website": "https://opencode.ai",
@@ -946,42 +946,42 @@
       "distribution": {
         "binary": {
           "darwin-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-darwin-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-darwin-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "darwin-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-darwin-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-darwin-x64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-linux-arm64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-linux-arm64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "linux-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-linux-x64.tar.gz",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-linux-x64.tar.gz",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-aarch64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-windows-arm64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-windows-arm64.zip",
             "cmd": "./opencode",
             "args": [
               "acp"
             ]
           },
           "windows-x86_64": {
-            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.11/opencode-windows-x64.zip",
+            "archive": "https://github.com/anomalyco/opencode/releases/download/v1.17.12/opencode-windows-x64.zip",
             "cmd": "./opencode.exe",
             "args": [
               "acp"
